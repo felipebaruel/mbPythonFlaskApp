@@ -32,7 +32,7 @@ def ad():
     str1 = ' '.join(my_resolver.nameservers)
     _LOGGER.info("nameserver used: " + str1)
     try:
-        a = my_resolver.query('ent.labgartner.com', "A")
+        a = my_resolver.query('webapp.ferocha.com', "A")
         _LOGGER.info("here1")
         _LOGGER.info(a)
         return a.join(str1)

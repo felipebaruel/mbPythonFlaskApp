@@ -4,6 +4,7 @@ import os
 from logging.handlers import TimedRotatingFileHandler
 import dns
 import dns.resolver
+import requests
 
 ENABLE_FILE_LOG = True
 app = Flask(__name__)
@@ -35,18 +36,20 @@ def ad():
         a = my_resolver.query('webapp.ferocha.com', "A")
         _LOGGER.info("here1")
         _LOGGER.info(a)
-        return a.join(str1)
+        return a
     except Exception  as e:
         _LOGGER.info("here2")
         _LOGGER.info('didnt resolved.')
         _LOGGER.info(str(e))
-        return str(e).join(str1)
-
+        return str(e)
 @app.route("/")
 def hello():
     _LOGGER.debug("printing debug log")
     _LOGGER.info("printing info log")
-    return "Hello World!"
+    r =requests.get('http://webapp.ferocha.com')
+    return r.text
+    #print(r.text)
+    #return "Hello World!"
 
 if __name__ == "__main__":
     app.run()
